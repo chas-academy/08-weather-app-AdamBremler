@@ -1,31 +1,39 @@
 import React, { useState } from 'react';
-import { Card, CardBody, Row } from 'reactstrap';
 import useApi from '../hooks/useApi';
 import moment from 'moment';
-import TemperatureHeader from './TemperatureHeader';
+import WeatherCard from './WeatherCard';
+import WeatherHeader from './WeatherHeader';
+import WeatherBody from './WeatherBody';
 
 export default function Weather(props) {
     const [location, setLocation] = useState('37.8267,-122.4233');
     const data = useApi(location);
 
     if (data) {
-        const { temperature, windSpeed, humidity, icon } = data.currently;
-        const time = moment(data.currently).format('ddd, hA');
+        let { time, temperature, windSpeed, humidity, icon } = data.currently;
+
+        temperature = Math.round(temperature);
+
+        time = moment(time * 1000);
+        const timeString = time.format('h:mmA');
+
+        const timeHours = time.format('k');
+        const timeAlpha = (timeHours < 12 ? timeHours : Math.abs(24 - timeHours)) / 12;
 
         return (
             <div>
-                <Card>
-                    <CardBody>
-                        <Row>
-                            <TemperatureHeader>
-                                {time}
-                            </TemperatureHeader>
-                            <TemperatureHeader>
-                                {temperature}
-                            </TemperatureHeader>
-                        </Row>
-                    </CardBody>
-                </Card>
+                <WeatherCard alpha={timeAlpha}>
+                    <WeatherHeader>
+                        <div>
+                            {temperature}°
+                        </div>
+                    </WeatherHeader>
+                    <WeatherBody>
+                        <div>
+                            {timeString}
+                        </div>
+                    </WeatherBody>
+                </WeatherCard>
             </div>
         )
     }
