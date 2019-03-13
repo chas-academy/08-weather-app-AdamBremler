@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useWeather from '../hooks/useWeather';
-import moment from 'moment';
+import useReverseGeo from '../hooks/useReverseGeo';
+import moment from 'moment-timezone';
 import WeatherCard from './WeatherCard';
 import WeatherHeader from './WeatherHeader';
 import WeatherBody from './WeatherBody';
 
 export default function Weather(props) {
     const [location, setLocation] = useState(props.location);
+
     const weatherData = useWeather(location);
+    const geoData = useReverseGeo(location);
 
-    console.log(weatherData);
+    useEffect(() => {
+        setLocation(props.location);
+    }, [props.location]);
 
-    if (weatherData) {
+    if (weatherData && geoData) {
         let { time, temperature, windSpeed, humidity, icon } = weatherData.currently;
 
         temperature = Math.round(temperature);
-        time = moment(time * 1000);
+        time = moment.tz(time * 1000, weatherData.timezone);
 
         const timeString = time.format('h:mmA');
 
@@ -26,17 +31,19 @@ export default function Weather(props) {
             <div>
                 <WeatherCard alpha={timeAlpha}>
                     <WeatherBody>
-                        Stockholm
+                        {
+                            geoData.address.city ||
+                            geoData.address.name ||
+                            geoData.address.suburb ||
+                            geoData.address.state ||
+                            geoData.address.country
+                        }
                     </WeatherBody>
                     <WeatherHeader>
-                        <div>
-                            {temperature}°
-                        </div>
+                        {temperature}°
                     </WeatherHeader>
                     <WeatherBody>
-                        <div>
-                            {timeString}
-                        </div>
+                        {timeString}
                     </WeatherBody>
                 </WeatherCard>
             </div>

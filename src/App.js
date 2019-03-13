@@ -6,20 +6,27 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            userLocation: '37.8267,-122.4233'
+            userLocation: null
         }
     }
 
     componentDidMount() {
         navigator.geolocation.getCurrentPosition(pos => {
-            this.setState({ userLocation: pos });
+            this.setState({ userLocation: `${pos.coords.latitude},${pos.coords.longitude}` });
         });
     }
 
     render() {
         return (
             <div>
-                <Weather location={this.state.userLocation} />
+                {this.state.userLocation ?
+                    <Weather location={this.state.userLocation} />
+                    :
+                    null
+                }
+
+                <Weather location='40.782347, -73.965911' />
+                <Weather location='64.146496, -21.942555' />
             </div>
         );
     }
