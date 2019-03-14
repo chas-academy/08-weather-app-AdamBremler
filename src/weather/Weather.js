@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useWeather from '../hooks/useWeather';
 import useReverseGeo from '../hooks/useReverseGeo';
 import moment from 'moment-timezone';
+import WeatherContainer from './WeatherContainer';
 import WeatherCard from './WeatherCard';
 import WeatherHeader from './WeatherHeader';
 import WeatherBody from './WeatherBody';
@@ -28,7 +29,7 @@ export default function Weather(props) {
         const timeAlpha = (timeHours < 12 ? timeHours : Math.abs(24 - timeHours)) / 12;
 
         return (
-            <div>
+            <WeatherContainer>
                 <WeatherCard alpha={timeAlpha}>
                     <WeatherBody>
                         {
@@ -41,12 +42,12 @@ export default function Weather(props) {
                     </WeatherBody>
                     <WeatherHeader>
                         {temperature}°
-                    </WeatherHeader>
+                        </WeatherHeader>
                     <WeatherBody>
                         {timeString}
                     </WeatherBody>
                 </WeatherCard>
-            </div>
+            </WeatherContainer>
         )
     }
 
