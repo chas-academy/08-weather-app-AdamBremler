@@ -3,11 +3,14 @@ import useWeather from '../hooks/useWeather';
 import useReverseGeo from '../hooks/useReverseGeo';
 import moment from 'moment-timezone';
 import WeatherContainer from './WeatherContainer';
+import WeatherInnerContainer from './WeatherInnerContainer';
 import WeatherCard from './WeatherCard';
 import WeatherHeader from './WeatherHeader';
 import WeatherBody from './WeatherBody';
 import WeatherIcon from './WeatherIcon';
 import WeatherIconContainer from './WeatherIconContainer';
+import WeatherInfoContainer from './WeatherInfoContainer';
+import WeatherInfoContent from './WeatherInfoContent';
 
 export default function Weather(props) {
     const [location, setLocation] = useState(props.location);
@@ -25,33 +28,40 @@ export default function Weather(props) {
         temperature = Math.round(temperature);
         time = moment.tz(time * 1000, weatherData.timezone);
 
-        const timeString = time.format('h:mmA');
+        const timeFormat = 'h:mmA';
+
+        const timeString = time.format(timeFormat);
 
         const timeHours = time.format('k');
         const timeAlpha = (timeHours < 12 ? timeHours : Math.abs(24 - timeHours)) / 12;
 
         return (
             <WeatherContainer>
-                <WeatherCard alpha={timeAlpha}>
-                    <WeatherBody>
-                        {
-                            geoData.address.city ||
-                            geoData.address.name ||
-                            geoData.address.suburb ||
-                            geoData.address.state ||
-                            geoData.address.country
-                        }
-                    </WeatherBody>
-                    <WeatherHeader>
-                        {temperature}°
-                    </WeatherHeader>
-                    <WeatherBody>
-                        {timeString}
-                    </WeatherBody>
-                    <WeatherIconContainer>
-                        <WeatherIcon icon={icon} />
-                    </WeatherIconContainer>
-                </WeatherCard>
+                <WeatherInnerContainer>
+                    <WeatherCard alpha={timeAlpha}>
+                        <WeatherBody>
+                            {
+                                geoData.address.city ||
+                                geoData.address.name ||
+                                geoData.address.suburb ||
+                                geoData.address.state ||
+                                geoData.address.country
+                            }
+                        </WeatherBody>
+                        <WeatherHeader>
+                            {temperature}°
+                        </WeatherHeader>
+                        <WeatherBody>
+                            {timeString}
+                        </WeatherBody>
+                        <WeatherIconContainer>
+                            <WeatherIcon icon={icon} />
+                        </WeatherIconContainer>
+                    </WeatherCard>
+                    <WeatherInfoContainer>
+                        <WeatherInfoContent weatherData={weatherData} timeFormat={timeFormat} />
+                    </WeatherInfoContainer>
+                </WeatherInnerContainer>
             </WeatherContainer>
         )
     }

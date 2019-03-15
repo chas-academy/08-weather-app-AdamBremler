@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { Card } from 'reactstrap';
 
 const WeatherCard = styled(Card)`
-    width: 100%;
+    font-weight: 300;
+    box-shadow: 1px 1px 30px #ddd;
     text-align: center;
     padding: 35px 40px;
     color: white;
