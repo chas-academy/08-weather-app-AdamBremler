@@ -6,6 +6,8 @@ import WeatherContainer from './WeatherContainer';
 import WeatherCard from './WeatherCard';
 import WeatherHeader from './WeatherHeader';
 import WeatherBody from './WeatherBody';
+import WeatherIcon from './WeatherIcon';
+import WeatherIconContainer from './WeatherIconContainer';
 
 export default function Weather(props) {
     const [location, setLocation] = useState(props.location);
@@ -42,10 +44,13 @@ export default function Weather(props) {
                     </WeatherBody>
                     <WeatherHeader>
                         {temperature}°
-                        </WeatherHeader>
+                    </WeatherHeader>
                     <WeatherBody>
                         {timeString}
                     </WeatherBody>
+                    <WeatherIconContainer>
+                        <WeatherIcon icon={icon} />
+                    </WeatherIconContainer>
                 </WeatherCard>
             </WeatherContainer>
         )

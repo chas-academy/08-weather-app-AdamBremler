@@ -19,20 +19,17 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <PageContainer className="justify-content-around">
-                    {this.state.userLocation ?
-                        <Weather location={this.state.userLocation} />
-                        :
-                        null
-                    }
+            <PageContainer>
+                {this.state.userLocation ?
+                    <Weather location={this.state.userLocation} />
+                    :
+                    null
+                }
 
-                    <Weather location='40.782347, -73.965911' />
-                    <Weather location='64.146496, -21.942555' />
-                    <Weather location='34.050985, -118.244508' />
-                    <Weather location='34.050985, -118.244508' />
-                </PageContainer>
-            </div>
+                <Weather location='40.782347, -73.965911' />
+                <Weather location='64.146496, -21.942555' />
+                <Weather location='34.050985, -118.244508' />
+            </PageContainer>
         );
     }
 }
