@@ -59,7 +59,7 @@ export default function Weather(props) {
                         </WeatherIconContainer>
                     </WeatherCard>
                     <WeatherInfoContainer>
-                        <WeatherInfoContent weatherData={weatherData} timeFormat={timeFormat} />
+                        <WeatherInfoContent weatherData={weatherData} timeFormat={timeFormat} timeAlpha={timeAlpha} />
                     </WeatherInfoContainer>
                 </WeatherInnerContainer>
             </WeatherContainer>
