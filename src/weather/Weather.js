@@ -9,8 +9,10 @@ import WeatherHeader from './WeatherHeader';
 import WeatherBody from './WeatherBody';
 import WeatherIcon from './WeatherIcon';
 import WeatherIconContainer from './WeatherIconContainer';
+import WeatherMiscContainer from './WeatherMiscContainer';
 import WeatherInfoContainer from './WeatherInfoContainer';
 import WeatherInfoContent from './WeatherInfoContent';
+import WeatherMiscContent from './WeatherMiscContent';
 
 export default function Weather(props) {
     const [location, setLocation] = useState(props.location);
@@ -54,6 +56,9 @@ export default function Weather(props) {
                         <WeatherBody>
                             {timeString}
                         </WeatherBody>
+                        <WeatherMiscContainer>
+                            <WeatherMiscContent windSpeed={windSpeed} humidity={humidity} />
+                        </WeatherMiscContainer>
                         <WeatherIconContainer>
                             <WeatherIcon icon={icon} />
                         </WeatherIconContainer>

@@ -9,6 +9,10 @@ const WeatherCard = styled(Card)`
     color: white;
     background-color: #005 !important;
     background-image: linear-gradient(rgba(96, 154, 225, ${props => props.alpha - .1}), rgba(118, 167, 227, ${props => props.alpha + .1}));
+    
+    &&& {
+        border: none;
+    }
 `;
 
 export default WeatherCard;

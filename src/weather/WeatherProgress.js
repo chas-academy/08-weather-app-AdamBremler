@@ -23,7 +23,7 @@ export default function WeatherProgress({ weatherData, timeFormat, timeAlpha }) 
     const timeSinceRise = time.diff(sunrise);
     const sunProgress = (timeSinceRise / sunTime) * 100;
 
-    const progressColor = Color('#94bae8').darken(Math.abs(1 - timeAlpha));
+    const progressColor = Color('#94bae8').darken(Math.abs(1 - timeAlpha) * 0.8);
 
     return (
         <Row>
