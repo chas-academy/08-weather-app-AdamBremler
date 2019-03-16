@@ -2,9 +2,13 @@ import styled from 'styled-components';
 import { ListGroupItem } from 'reactstrap';
 
 const WeatherInfoListItem = styled(ListGroupItem).attrs({
-    className: 'd-flex flex-row justify-content-between align-items-center'
+    className: 'd-flex flex-row align-items-center'
 })`
+    justify-content: space-between;
+    
     &&& {
+        padding-top: ${props => props.day ? '10px' : '0px'};
+        padding-bottom: ${props => props.day ? '10px' : '0px'};
         border-color: #eaeaea;
     }
 
