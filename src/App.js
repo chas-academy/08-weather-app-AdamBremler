@@ -8,7 +8,8 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            userLocation: null
+            userLocation: null,
+            mainAlpha: 1
         }
     }
 
@@ -18,13 +19,17 @@ class App extends Component {
         });
     }
 
+    setMainAlpha = (mainAlpha) => {
+        this.setState({ mainAlpha });
+    }
+
     render() {
         return (
             <div>
-                <Nav />
+                <Nav mainAlpha={this.state.mainAlpha} />
                 <PageContainer>
                     {this.state.userLocation ?
-                        <Weather location={this.state.userLocation} />
+                        <Weather location={this.state.userLocation} setMainAlpha={this.setMainAlpha} />
                         :
                         null
                     }

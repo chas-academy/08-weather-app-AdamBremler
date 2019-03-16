@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Input } from 'reactstrap';
+import Color from 'color';
+import NavFormContainer from './NavFormContainer';
 import NavButton from './NavButton';
+import NavInput from './NavInput';
 
-export default function NavSearchForm() {
+export default function NavSearchForm({ mainAlpha }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [input, setInput] = useState('');
 
@@ -15,10 +17,12 @@ export default function NavSearchForm() {
         setSearchTerm(input);
     }
 
+    const buttonColor = Color('#94bae8').darken(Math.abs(1 - mainAlpha) * 0.7);
+
     return (
-        <Form onSubmit={handleSubmit} inline>
-            <Input type="text" placeholder='Add a location...' value={input} onChange={handleChange} />
-            <NavButton>Add</NavButton>
-        </Form>
+        <NavFormContainer onSubmit={handleSubmit} inline>
+            <NavInput type="text" placeholder='Add a location...' value={input} onChange={handleChange} />
+            <NavButton color={buttonColor.string()}>Add</NavButton>
+        </NavFormContainer>
     )
 }

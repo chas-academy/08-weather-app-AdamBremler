@@ -17,12 +17,21 @@ import WeatherMiscContent from './WeatherMiscContent';
 export default function Weather(props) {
     const [location, setLocation] = useState(props.location);
 
+    const [timeAlpha, setTimeAlpha] = useState(1);
+
     const weatherData = useWeather(location);
     const geoData = useReverseGeo(location);
+
 
     useEffect(() => {
         setLocation(props.location);
     }, [props.location]);
+
+    useEffect(() => {
+        if (props.setMainAlpha) {
+            props.setMainAlpha(timeAlpha);
+        }
+    }, [timeAlpha]);
 
     if (weatherData && geoData) {
         let { time, temperature, windSpeed, humidity, icon } = weatherData.currently;
@@ -36,7 +45,10 @@ export default function Weather(props) {
         const timeString = time.format(timeFormat);
 
         const timeHours = time.format('k');
-        const timeAlpha = (timeHours < 12 ? timeHours : Math.abs(24 - timeHours)) / 12;
+        const alpha = (timeHours < 12 ? timeHours : Math.abs(24 - timeHours)) / 12;
+        if (timeAlpha !== alpha) {
+            setTimeAlpha(alpha);
+        }
 
         return (
             <WeatherContainer>
