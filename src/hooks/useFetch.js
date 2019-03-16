@@ -11,7 +11,9 @@ export default function useFetch(url) {
     }
 
     useEffect(() => {
-        fetchData();
+        if (url) {
+            fetchData();
+        }
     }, [url]);
 
     return data;

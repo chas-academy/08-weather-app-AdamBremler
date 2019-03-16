@@ -22,7 +22,6 @@ export default function Weather(props) {
     const weatherData = useWeather(location);
     const geoData = useReverseGeo(location);
 
-
     useEffect(() => {
         setLocation(props.location);
     }, [props.location]);
@@ -33,7 +32,13 @@ export default function Weather(props) {
         }
     }, [timeAlpha]);
 
-    if (weatherData && geoData) {
+    useEffect(() => {
+        if (weatherData && geoData && (weatherData.error || geoData.error)) {
+            props.remove(location);
+        };
+    }, [weatherData, geoData]);
+
+    if (weatherData && geoData && !weatherData.error && !geoData.error) {
         let { time, temperature, windSpeed, humidity, icon } = weatherData.currently;
 
         temperature = Math.round(temperature);

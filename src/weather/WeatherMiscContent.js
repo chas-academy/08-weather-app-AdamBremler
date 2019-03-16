@@ -11,7 +11,7 @@ export default function WeatherMiscContent({ windSpeed, humidity }) {
             </div>
             <div>
                 <img src={humidityIcon} alt='Humidity' title='Humidity' />
-                {humidity * 100} %
+                {Math.round(humidity * 100)} %
             </div>
         </div>
     )

@@ -22,7 +22,7 @@ export default function WeatherInfoContent(props) {
     return (
         <div>
             <WeatherProgress {...props} />
-            <Scrollbars style={{ height: 300 }} autoHide>
+            <Scrollbars style={{ height: 300 }}>
                 <WeatherInfoList flush>
                     {[...hourList].map(hour => (
                         <WeatherInfoListItem key={`hour${hour.time}`} hour={1}>

@@ -2,10 +2,10 @@ import React from 'react';
 import NavContainer from './NavContainer';
 import NavSearchForm from './NavSearchForm';
 
-export default function Nav({ mainAlpha }) {
+export default function Nav(props) {
     return (
         <NavContainer>
-            <NavSearchForm mainAlpha={mainAlpha} />
+            <NavSearchForm {...props} />
         </NavContainer>
     )
 }
