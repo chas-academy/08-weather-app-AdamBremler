@@ -31,6 +31,7 @@ export default function Weather(props) {
         time = moment.tz(time * 1000, weatherData.timezone);
 
         const timeFormat = 'h:mmA';
+        const hourOnlyFormat = 'hA';
 
         const timeString = time.format(timeFormat);
 
@@ -64,7 +65,7 @@ export default function Weather(props) {
                         </WeatherIconContainer>
                     </WeatherCard>
                     <WeatherInfoContainer>
-                        <WeatherInfoContent weatherData={weatherData} timeFormat={timeFormat} timeAlpha={timeAlpha} />
+                        <WeatherInfoContent weatherData={weatherData} timeFormat={timeFormat} timeAlpha={timeAlpha} hourOnlyFormat={hourOnlyFormat} />
                     </WeatherInfoContainer>
                 </WeatherInnerContainer>
             </WeatherContainer>

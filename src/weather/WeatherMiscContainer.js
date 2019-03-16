@@ -4,8 +4,8 @@ const WeatherMiscContainer = styled.div.attrs({
     className: 'd-flex flex-column'
 })`
     position: absolute;
-    left: 14px;
-    bottom: 14px;
+    left: 17px;
+    bottom: 17px;
     font-size: 1.1em;
     text-align: left;
 
