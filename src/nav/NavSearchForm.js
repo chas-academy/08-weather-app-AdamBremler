@@ -7,17 +7,17 @@ import NavButton from './NavButton';
 import NavInput from './NavInput';
 import useForwardGeo from '../hooks/useForwardGeo';
 
-export default function NavSearchForm({ mainAlpha, addLocation }) {
+export default function NavSearchForm({ mainAlpha, addLocation, searchInputError, setSearchInputError }) {
     const [input, setInput] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
-
-    const [errorMessage, setErrorMessage] = useState('');
 
     const geoData = useForwardGeo(searchTerm);
 
     useEffect(() => {
         if (geoData) {
             if (geoData.length) {
+                setInput('');
+
                 const { lat, lon } = geoData[0];
                 const location = `${lat},${lon}`;
 
@@ -25,20 +25,32 @@ export default function NavSearchForm({ mainAlpha, addLocation }) {
             }
 
             else {
-                setErrorMessage('Could not find that location');
+                setSearchInputError('Could not find that location');
             }
         }
     }, [geoData]);
 
+    useEffect(() => {
+        console.log(searchInputError);
+    }, [searchInputError]);
+
     const handleChange = e => {
-        setErrorMessage('');
+        setSearchInputError('');
         setInput(e.target.value);
     }
 
     const handleSubmit = e => {
         e.preventDefault();
 
-        setInput('');
+        if (!input) {
+            setSearchInputError('You have to enter a location');
+            return;
+        }
+
+        if (input === searchTerm) {
+            setSearchInputError('You have already added that location');
+            return;
+        }
 
         setSearchTerm(input);
     }
@@ -48,8 +60,8 @@ export default function NavSearchForm({ mainAlpha, addLocation }) {
     return (
         <NavFormContainer onSubmit={handleSubmit} inline>
             <NavSearchFormGroup>
-                <NavInput type="text" placeholder='Add a location...' value={input} onChange={handleChange} invalid={errorMessage ? true : false} />
-                <FormFeedback>{errorMessage}</FormFeedback>
+                <NavInput type="text" placeholder='Add a location...' value={input} onChange={handleChange} invalid={searchInputError ? true : false} />
+                <FormFeedback>{searchInputError}</FormFeedback>
             </NavSearchFormGroup>
             <NavButton color={buttonColor.string()}>Add</NavButton>
         </NavFormContainer>

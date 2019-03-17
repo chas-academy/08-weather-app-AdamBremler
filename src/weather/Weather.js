@@ -13,6 +13,7 @@ import WeatherMiscContainer from './WeatherMiscContainer';
 import WeatherInfoContainer from './WeatherInfoContainer';
 import WeatherInfoContent from './WeatherInfoContent';
 import WeatherMiscContent from './WeatherMiscContent';
+import WeatherBodyDay from './WeatherBodyDay';
 
 export default function Weather(props) {
     const [location, setLocation] = useState(props.location);
@@ -93,6 +94,7 @@ export default function Weather(props) {
                         </WeatherHeader>
                         <WeatherBody>
                             {timeString}
+                            <WeatherBodyDay>{time.format('dddd')}</WeatherBodyDay>
                         </WeatherBody>
                         <WeatherMiscContainer>
                             <WeatherMiscContent windSpeed={windSpeed} humidity={humidity} />

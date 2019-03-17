@@ -15,7 +15,8 @@ class App extends Component {
                 '64.146496, -21.942555',
                 '34.050985, -118.244508',
                 '-41.290375, 174.775558' */
-            ]
+            ],
+            searchInputError: ''
         }
     }
 
@@ -37,7 +38,7 @@ class App extends Component {
         }
 
         else {
-            // Alert user
+            this.setSearchInputError('You have already added that location');
         }
     }
 
@@ -47,10 +48,16 @@ class App extends Component {
         }));
     }
 
+    setSearchInputError = message => {
+        this.setState({
+            searchInputError: message
+        });
+    }
+
     render() {
         return (
             <div>
-                <Nav mainAlpha={this.state.mainAlpha} addLocation={this.addLocation} />
+                <Nav mainAlpha={this.state.mainAlpha} addLocation={this.addLocation} searchInputError={this.state.searchInputError} setSearchInputError={this.setSearchInputError} />
                 <PageContainer>
                     {this.state.userLocation ?
                         <Weather key={this.state.userLocation} location={this.state.userLocation} setMainAlpha={this.setMainAlpha} remove={this.removeLocation} />
