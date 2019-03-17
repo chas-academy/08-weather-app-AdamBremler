@@ -16,7 +16,8 @@ class App extends Component {
                 '34.050985, -118.244508',
                 '-41.290375, 174.775558' */
             ],
-            searchInputError: ''
+            searchInputError: '',
+            isSiUnits: true
         }
     }
 
@@ -54,18 +55,42 @@ class App extends Component {
         });
     }
 
+    setSiUnits = value => {
+        this.setState({
+            isSiUnits: value
+        });
+    }
+
     render() {
         return (
             <div>
-                <Nav mainAlpha={this.state.mainAlpha} addLocation={this.addLocation} searchInputError={this.state.searchInputError} setSearchInputError={this.setSearchInputError} />
+                <Nav
+                    mainAlpha={this.state.mainAlpha}
+                    addLocation={this.addLocation}
+                    searchInputError={this.state.searchInputError}
+                    setSearchInputError={this.setSearchInputError}
+                    isSiUnits={this.state.isSiUnits}
+                    setSiUnits={this.setSiUnits}
+                />
                 <PageContainer>
                     {this.state.userLocation ?
-                        <Weather key={this.state.userLocation} location={this.state.userLocation} setMainAlpha={this.setMainAlpha} remove={this.removeLocation} />
+                        <Weather
+                            key={this.state.userLocation}
+                            location={this.state.userLocation}
+                            setMainAlpha={this.setMainAlpha}
+                            remove={this.removeLocation}
+                            isSiUnits={this.state.isSiUnits}
+                        />
                         :
                         null
                     }
                     {this.state.locationList.map(location => (
-                        <Weather key={location} location={location} remove={this.removeLocation} />
+                        <Weather
+                            key={location}
+                            location={location}
+                            remove={this.removeLocation}
+                            isSiUnits={this.state.isSiUnits}
+                        />
                     ))}
                 </PageContainer>
             </div>

@@ -22,7 +22,7 @@ export default function Weather(props) {
 
     const [timeAlpha, setTimeAlpha] = useState(1);
 
-    const weatherData = useWeather(location, changeIdentifier);
+    const weatherData = useWeather(location, changeIdentifier, props.isSiUnits);
     const geoData = useReverseGeo(location);
 
     const getTimeUntilNextMinute = () => {

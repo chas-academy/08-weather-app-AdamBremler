@@ -25,17 +25,6 @@ export default function WeatherInfoContent(props) {
 
     const dayList = weatherData.daily.data.slice(1).map(d => ({ ...d, momentTime: moment.tz(d.time * 1000, timezone) }));
 
-    moment.locale('en', {
-        calendar: {
-            lastDay: '[Yesterday]',
-            sameDay: '[Today]',
-            nextDay: '[Tomorrow]',
-            lastWeek: '[last] dddd',
-            nextWeek: 'dddd',
-            sameElse: 'L'
-        }
-    });
-
     return (
         <div>
             <WeatherProgress {...props} />
@@ -47,7 +36,7 @@ export default function WeatherInfoContent(props) {
                                 <div>
                                     <small>
                                         {hour.momentTime.isSameOrAfter(moment().add(1, 'day'), 'd') ?
-                                            hour.momentTime.clone().startOf('day').calendar(moment().startOf('day')) : ''
+                                            'Tomorrow' : ''
                                         }
                                     </small>
                                     <SmallDiv>
