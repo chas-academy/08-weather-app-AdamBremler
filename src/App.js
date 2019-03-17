@@ -90,6 +90,7 @@ class App extends Component {
                             location={location}
                             remove={this.removeLocation}
                             isSiUnits={this.state.isSiUnits}
+                            removeAble
                         />
                     ))}
                 </PageContainer>

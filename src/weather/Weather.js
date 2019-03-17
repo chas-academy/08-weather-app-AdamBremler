@@ -14,6 +14,8 @@ import WeatherInfoContainer from './WeatherInfoContainer';
 import WeatherInfoContent from './WeatherInfoContent';
 import WeatherMiscContent from './WeatherMiscContent';
 import WeatherBodyDay from './WeatherBodyDay';
+import WeatherRemoveButton from './WeatherRemoveButton';
+import WeatherRemoveButtonContainer from './WeatherRemoveButtonContainer';
 
 export default function Weather(props) {
     const [location, setLocation] = useState(props.location);
@@ -24,6 +26,10 @@ export default function Weather(props) {
 
     const weatherData = useWeather(location, changeIdentifier, props.isSiUnits);
     const geoData = useReverseGeo(location);
+
+    const removeSelf = () => {
+        props.remove(location);
+    }
 
     const getTimeUntilNextMinute = () => {
         return moment().add(1, 'minute').startOf('minute').add(5, 'seconds').diff(moment());
@@ -49,7 +55,7 @@ export default function Weather(props) {
 
     useEffect(() => {
         if (weatherData && geoData && (weatherData.error || geoData.error)) {
-            props.remove(location);
+            removeSelf();
         };
     }, [weatherData, geoData]);
 
@@ -101,6 +107,11 @@ export default function Weather(props) {
                         <WeatherIconContainer>
                             <WeatherIcon icon={icon} />
                         </WeatherIconContainer>
+                        {props.removeAble ? (
+                            <WeatherRemoveButtonContainer onClick={removeSelf}>
+                                <WeatherRemoveButton />
+                            </WeatherRemoveButtonContainer>
+                        ) : ''}
                     </WeatherCard>
                     <WeatherInfoContainer>
                         <WeatherInfoContent weatherData={weatherData} timeFormat={timeFormat} timeAlpha={timeAlpha} hourOnlyFormat={hourOnlyFormat} />
