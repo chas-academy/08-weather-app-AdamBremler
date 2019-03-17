@@ -25,6 +25,21 @@ class App extends Component {
         navigator.geolocation.getCurrentPosition(pos => {
             this.setState({ userLocation: `${pos.coords.latitude},${pos.coords.longitude}` });
         });
+
+        this.loadStoredLocationList();
+    }
+
+    storeLocationList = () => {
+        localStorage.setItem('locationList', JSON.stringify(this.state.locationList));
+    }
+
+    loadStoredLocationList = () => {
+        const stored = localStorage.getItem('locationList');
+        const parsedList = stored ? JSON.parse(stored) : [];
+
+        this.setState({
+            locationList: parsedList
+        });
     }
 
     setMainAlpha = mainAlpha => {
@@ -35,7 +50,7 @@ class App extends Component {
         if (!this.state.locationList.includes(location)) {
             this.setState(prevState => ({
                 locationList: [...prevState.locationList, location]
-            }));
+            }), this.storeLocationList);
         }
 
         else {
@@ -46,7 +61,7 @@ class App extends Component {
     removeLocation = location => {
         this.setState(prevState => ({
             locationList: prevState.locationList.filter(l => l !== location)
-        }));
+        }), this.storeLocationList);
     }
 
     setSearchInputError = message => {
