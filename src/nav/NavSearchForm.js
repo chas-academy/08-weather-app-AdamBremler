@@ -6,7 +6,7 @@ import NavButton from './NavButton';
 import NavInput from './NavInput';
 import useForwardGeo from '../hooks/useForwardGeo';
 
-export default function NavSearchForm({ weatherColor, addLocation, searchInputError, setSearchInputError }) {
+export default function NavSearchForm({ weatherColor, addLocation, searchInputError, setSearchInputError, locationList }) {
     const [input, setInput] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -28,6 +28,10 @@ export default function NavSearchForm({ weatherColor, addLocation, searchInputEr
             }
         }
     }, [geoData]);
+
+    useEffect(() => {
+        setSearchTerm('');
+    }, [locationList]);
 
     const handleChange = e => {
         setSearchInputError('');

@@ -16,6 +16,7 @@ import WeatherMiscContent from './WeatherMiscContent';
 import WeatherBodyDay from './WeatherBodyDay';
 import WeatherRemoveButton from './WeatherRemoveButton';
 import WeatherRemoveButtonContainer from './WeatherRemoveButtonContainer';
+import Loading from '../loading/Loading';
 
 export default function Weather(props) {
     const [location, setLocation] = useState(props.location);
@@ -123,7 +124,7 @@ export default function Weather(props) {
 
     else {
         return (
-            <div>Loading...</div>
+            <Loading />
         )
     }
 }

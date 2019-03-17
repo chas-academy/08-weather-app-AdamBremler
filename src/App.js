@@ -71,6 +71,7 @@ class App extends Component {
                     setSearchInputError={this.setSearchInputError}
                     isSiUnits={this.state.isSiUnits}
                     setSiUnits={this.setSiUnits}
+                    locationList={this.state.locationList}
                 />
                 <PageContainer>
                     {this.state.userLocation ?
