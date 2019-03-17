@@ -21,8 +21,6 @@ export default function WeatherInfoContent(props) {
 
     const hourList = weatherData.hourly.data.slice(1, 25).map(h => ({ ...h, momentTime: moment.tz(h.time * 1000, timezone) }));
 
-    console.log(hourList)
-
     const dayList = weatherData.daily.data.slice(1).map(d => ({ ...d, momentTime: moment.tz(d.time * 1000, timezone) }));
 
     return (

@@ -29,10 +29,6 @@ export default function NavSearchForm({ weatherColor, addLocation, searchInputEr
         }
     }, [geoData]);
 
-    useEffect(() => {
-        console.log(searchInputError);
-    }, [searchInputError]);
-
     const handleChange = e => {
         setSearchInputError('');
         setInput(e.target.value);

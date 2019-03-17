@@ -26,7 +26,7 @@ export default function Weather(props) {
     const geoData = useReverseGeo(location);
 
     const getTimeUntilNextMinute = () => {
-        return moment().add(1, 'minute').startOf('minute').diff(moment());
+        return moment().add(1, 'minute').startOf('minute').add(5, 'seconds').diff(moment());
     }
 
     const updateData = () => {
@@ -48,7 +48,6 @@ export default function Weather(props) {
     }, [timeAlpha]);
 
     useEffect(() => {
-        console.log(geoData)
         if (weatherData && geoData && (weatherData.error || geoData.error)) {
             props.remove(location);
         };
@@ -60,8 +59,8 @@ export default function Weather(props) {
         temperature = Math.round(temperature);
         time = moment.tz(time * 1000, weatherData.timezone);
 
-        const timeFormat = 'h:mmA';
-        const hourOnlyFormat = 'hA';
+        const timeFormat = props.isSiUnits ? 'kk:mm' : 'h:mmA';
+        const hourOnlyFormat = props.isSiUnits ? 'kk' : 'hA';
 
         const timeString = time.format(timeFormat);
 
