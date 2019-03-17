@@ -30,9 +30,15 @@ class App extends Component {
     }
 
     addLocation = location => {
-        this.setState(prevState => ({
-            locationList: [...prevState.locationList, location]
-        }));
+        if (!this.state.locationList.includes(location)) {
+            this.setState(prevState => ({
+                locationList: [...prevState.locationList, location]
+            }));
+        }
+
+        else {
+            // Alert user
+        }
     }
 
     removeLocation = location => {
@@ -47,12 +53,12 @@ class App extends Component {
                 <Nav mainAlpha={this.state.mainAlpha} addLocation={this.addLocation} />
                 <PageContainer>
                     {this.state.userLocation ?
-                        <Weather location={this.state.userLocation} setMainAlpha={this.setMainAlpha} remove={this.removeLocation} />
+                        <Weather key={this.state.userLocation} location={this.state.userLocation} setMainAlpha={this.setMainAlpha} remove={this.removeLocation} />
                         :
                         null
                     }
                     {this.state.locationList.map(location => (
-                        <Weather location={location} remove={this.removeLocation} />
+                        <Weather key={location} location={location} remove={this.removeLocation} />
                     ))}
                 </PageContainer>
             </div>

@@ -17,13 +17,27 @@ import WeatherMiscContent from './WeatherMiscContent';
 export default function Weather(props) {
     const [location, setLocation] = useState(props.location);
 
+    const [changeIdentifier, setChangeIdentifier] = useState();
+
     const [timeAlpha, setTimeAlpha] = useState(1);
 
-    const weatherData = useWeather(location);
+    const weatherData = useWeather(location, changeIdentifier);
     const geoData = useReverseGeo(location);
+
+    const getTimeUntilNextMinute = () => {
+        return moment().add(1, 'minute').startOf('minute').diff(moment());
+    }
+
+    const updateData = () => {
+        setChangeIdentifier(moment().format('m'));
+
+        setTimeout(updateData, getTimeUntilNextMinute());
+    }
 
     useEffect(() => {
         setLocation(props.location);
+
+        //setTimeout(updateData, getTimeUntilNextMinute());
     }, [props.location]);
 
     useEffect(() => {
@@ -33,6 +47,7 @@ export default function Weather(props) {
     }, [timeAlpha]);
 
     useEffect(() => {
+        console.log(geoData)
         if (weatherData && geoData && (weatherData.error || geoData.error)) {
             props.remove(location);
         };
@@ -62,9 +77,14 @@ export default function Weather(props) {
                         <WeatherBody>
                             {
                                 geoData.address.city ||
-                                geoData.address.name ||
-                                geoData.address.suburb ||
+                                geoData.address.water ||
                                 geoData.address.state ||
+                                geoData.address.county ||
+                                geoData.address.suburb ||
+                                geoData.address.name ||
+                                geoData.name ||
+                                geoData.address.village ||
+                                geoData.address.road ||
                                 geoData.address.country
                             }
                         </WeatherBody>

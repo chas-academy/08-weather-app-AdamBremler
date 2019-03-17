@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function useFetch(url) {
+export default function useFetch(url, changeIdentifier) {
     const [data, setData] = useState();
 
     const fetchData = async () => {
@@ -14,7 +14,7 @@ export default function useFetch(url) {
         if (url) {
             fetchData();
         }
-    }, [url]);
+    }, [url, changeIdentifier]);
 
     return data;
 }
