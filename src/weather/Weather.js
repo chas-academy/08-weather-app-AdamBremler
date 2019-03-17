@@ -45,7 +45,7 @@ export default function Weather(props) {
     useEffect(() => {
         setLocation(props.location);
 
-        //setTimeout(updateData, getTimeUntilNextMinute());
+        setTimeout(updateData, getTimeUntilNextMinute());
     }, [props.location]);
 
     useEffect(() => {
@@ -103,7 +103,7 @@ export default function Weather(props) {
                             <WeatherBodyDay>{time.format('dddd')}</WeatherBodyDay>
                         </WeatherBody>
                         <WeatherMiscContainer>
-                            <WeatherMiscContent windSpeed={windSpeed} humidity={humidity} />
+                            <WeatherMiscContent windSpeed={windSpeed} humidity={humidity} isSiUnits={props.isSiUnits} />
                         </WeatherMiscContainer>
                         <WeatherIconContainer>
                             <WeatherIcon icon={icon} />

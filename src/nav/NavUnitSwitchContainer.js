@@ -8,6 +8,19 @@ const NavUnitSwitchContainer = styled(Col).attrs({
         font-size: 1.4em;
         margin: 0;
     }
+
+    margin-top: -10px;
+
+    & > label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 14px 0 0 0;
+
+        & > small {
+            
+        }
+    }
 `;
 
 export default NavUnitSwitchContainer;

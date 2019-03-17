@@ -3,6 +3,7 @@ import './App.css';
 import Nav from './nav/Nav';
 import Weather from './weather/Weather';
 import PageContainer from './PageContainer';
+import Footer from './footer/Footer';
 
 class App extends Component {
     constructor() {
@@ -10,12 +11,7 @@ class App extends Component {
         this.state = {
             userLocation: null,
             mainAlpha: 0.6,
-            locationList: [
-                /* '40.782347, -73.965911',
-                '64.146496, -21.942555',
-                '34.050985, -118.244508',
-                '-41.290375, 174.775558' */
-            ],
+            locationList: [],
             searchInputError: '',
             isSiUnits: true
         }
@@ -35,7 +31,12 @@ class App extends Component {
 
     loadStoredLocationList = () => {
         const stored = localStorage.getItem('locationList');
-        const parsedList = stored ? JSON.parse(stored) : [];
+        const parsedList = stored ? JSON.parse(stored) : [
+            '40.782347, -73.965911',
+            '64.146496, -21.942555',
+            '34.050985, -118.244508',
+            '-41.290375, 174.775558'
+        ];
 
         this.setState({
             locationList: parsedList
@@ -110,6 +111,7 @@ class App extends Component {
                         />
                     ))}
                 </PageContainer>
+                <Footer />
             </div>
         );
     }

@@ -16,7 +16,6 @@ import SmallDiv from '../common/SmallDiv';
 export default function WeatherInfoContent(props) {
     const weatherData = props.weatherData;
     const timezone = weatherData.timezone;
-    const timeFormat = props.timeFormat;
     const hourOnlyFormat = props.hourOnlyFormat;
 
     const hourList = weatherData.hourly.data.slice(1, 25).map(h => ({ ...h, momentTime: moment.tz(h.time * 1000, timezone) }));
